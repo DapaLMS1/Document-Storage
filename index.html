@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLTSTE003 - Record Storage & Validation</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkPurple: '#532A8C',
+                        lightPurple: '#9D8ABB',
+                        brightGreen: '#7ABF49',
+                        lightGreen: '#96BF78',
+                        lightGrey: '#F2F2F2'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Smooth transition for accordion */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 500px; /* Arbitrary large number to fit content */
+            opacity: 1;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-lightGrey min-h-screen font-sans text-gray-800">
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        
+        <!-- Intro Card -->
+        <div class="bg-white rounded-xl shadow-sm border-l-4 border-brightGreen p-6 mb-8">
+            <div class="flex items-start gap-4">
+                <div class="bg-lightGrey p-3 rounded-full text-darkPurple shrink-0">
+                    <i data-lucide="info" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-darkPurple mb-2">Why Keep Records?</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        The long-term storage of records is essential for responding to future audits, legal inquiries, or post-operative infection investigations. Click the topics below to learn more about the specific requirements.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Accordions -->
+        <div class="space-y-4 mb-12">
+            
+            <!-- Accordion 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <button onclick="toggleAccordion('acc1', 'icon1')" class="w-full flex items-center justify-between p-5 hover:bg-lightGrey/50 transition-colors focus:outline-none focus:ring-2 focus:ring-lightPurple focus:ring-inset">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="bg-lightPurple/20 p-2 rounded-lg text-darkPurple">
+                            <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-lg text-darkPurple">The Seven-Year Rule</span>
+                    </div>
+                    <i data-lucide="chevron-down" id="icon1" class="w-5 h-5 text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div id="acc1" class="accordion-content bg-white px-5">
+                    <div class="pb-5 pt-2 text-gray-600 border-t border-gray-100 ml-[3.25rem]">
+                        Under Australian regulatory requirements, all reprocessing records must be maintained in a secure, designated storage area for a minimum of <strong>seven years</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <button onclick="toggleAccordion('acc2', 'icon2')" class="w-full flex items-center justify-between p-5 hover:bg-lightGrey/50 transition-colors focus:outline-none focus:ring-2 focus:ring-lightPurple focus:ring-inset">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="bg-lightPurple/20 p-2 rounded-lg text-darkPurple">
+                            <i data-lucide="printer" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-lg text-darkPurple">Archival Quality</span>
+                    </div>
+                    <i data-lucide="chevron-down" id="icon2" class="w-5 h-5 text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div id="acc2" class="accordion-content bg-white px-5">
+                    <div class="pb-5 pt-2 text-gray-600 border-t border-gray-100 ml-[3.25rem]">
+                        Most sterilisers produce thermal paper printouts which fade significantly over time. To ensure these remain legible for the full seven-year period, printouts <strong>must be scanned or photocopied</strong> onto standard paper.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <button onclick="toggleAccordion('acc3', 'icon3')" class="w-full flex items-center justify-between p-5 hover:bg-lightGrey/50 transition-colors focus:outline-none focus:ring-2 focus:ring-lightPurple focus:ring-inset">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="bg-lightPurple/20 p-2 rounded-lg text-darkPurple">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-lg text-darkPurple">Annual Validation</span>
+                    </div>
+                    <i data-lucide="chevron-down" id="icon3" class="w-5 h-5 text-gray-500 transition-transform duration-300"></i>
+                </button>
+                <div id="acc3" class="accordion-content bg-white px-5">
+                <div class="pb-5 pt-2 text-gray-600 border-t border-gray-100 ml-[3.25rem]">
+                    <p class="mb-3">Every steriliser must undergo formal validation <strong>every 12 months</strong> (or after major repairs). This involves two key components:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-brightGreen shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-darkPurple">Performance Qualification (PQ):</strong> An authorized technician tests the machine using your practice's actual instrument loads to confirm steam reaches the center of your specific kits and loading patterns.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="settings" class="w-5 h-5 text-brightGreen shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-darkPurple">Calibration:</strong> Ensuring the internal sensors (the "brain" of the machine) accurately reflect the temperature and pressure inside the chamber.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="text-center text-gray-500 text-sm py-8">
+        <p>HLTSTE003 Interactive Learning Module. Developed for demonstration.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Accordion Logic
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            // Toggle current
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            icon.classList.remove('rotate-180');
+        } else {
+            content.classList.add('open');
+            icon.classList.add('rotate-180');
+        }
+    }
+</script>
+</body>
+</html>
